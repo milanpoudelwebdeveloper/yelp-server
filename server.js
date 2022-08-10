@@ -1,6 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const fs = rquire("fs");
+const fs = require("fs");
 const morgan = require("morgan");
 const cors = require("cors")
 
@@ -18,6 +18,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //gives us req.body and converts it to standard javascript object
 app.use(bodyParser.json({ limit: "2mb" }));
 app.use(cors())
+
+fs.readdirSync("./routes").map((r)=> app.use("/api/", require(`./routes/${r}`)))
 
 const port = process.env.PORT || 8000;
 
