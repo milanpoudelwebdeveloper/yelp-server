@@ -1,5 +1,5 @@
 const express = require("express");
-const { getAllRestaurants, getRestaurantDetail, createNewRestaurant, updateRestaurant } = require("../controller/restaurant");
+const { getAllRestaurants, getRestaurantDetail, createNewRestaurant, updateRestaurant, deleteRestaurant } = require("../controller/restaurant");
 
 const router = express.Router();
 
@@ -15,6 +15,9 @@ router.post("/restaurant", createNewRestaurant)
 
 //update a restaurant
 router.put("/restaurant/:id", updateRestaurant)
+
+//delete a restaurant
+router.delete("/restaurant/:id", deleteRestaurant)
 
 
 module.exports=router

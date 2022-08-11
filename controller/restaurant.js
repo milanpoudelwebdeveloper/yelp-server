@@ -82,3 +82,20 @@ exports.updateRestaurant = async (req, res) => {
     });
   }
 };
+
+
+exports.deleteRestaurant = async(req,res)=> {
+  try {
+    await db.query("DELETE FROM restaurants WHERE id= $1", [req.params.id])
+    res.status(200).json({
+      status: "success",
+      data : "The restaurant is deleted succesfully"
+    })
+  }catch(e) {
+    console.log(e)
+    res.status(500).json({
+      status:"error",
+      message:e
+    })
+  }
+}
