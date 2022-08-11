@@ -1,5 +1,5 @@
 const express = require("express");
-const { getAllRestaurants, getRestaurantDetail } = require("../controller/restaurant");
+const { getAllRestaurants, getRestaurantDetail, createNewRestaurant } = require("../controller/restaurant");
 
 const router = express.Router();
 
@@ -9,6 +9,9 @@ router.get("/restaurants", getAllRestaurants)
 
 //get single restaurant details
 router.get("/restaurant/:id", getRestaurantDetail)
+
+//create a new restaurant
+router.post("/restaurant", createNewRestaurant)
 
 
 module.exports=router
