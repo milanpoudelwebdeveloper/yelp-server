@@ -1,4 +1,3 @@
-
 const db = require("../db");
 
 exports.getAllRestaurants = async (_, res) => {
@@ -46,15 +45,35 @@ exports.getRestaurantDetail = async (req, res) => {
 exports.createNewRestaurant = async (req, res) => {
   const { name, location, price_range } = req.body;
   try {
-    const {rows} = await db.query(
+    const { rows } = await db.query(
       "INSERT INTO restaurants (name, location, price_range) VALUES ($1, $2, $3) returning *",
       [name, location, price_range]
     );
-    console.log(rows[0])
+    console.log(rows[0]);
     res.status(200).json({
       status: "success",
-      data: rows[0]
-    })
+      data: rows[0],
+    });
+  } catch (e) {
+    console.log(e);
+    res.status(500).json({
+      status: "error",
+      message: e,
+    });
+  }
+};
+
+exports.updateRestaurant = async (req, res) => {
+  const { name, location, price_range } = req.body;
+  try {
+    const { rows } = await db.query(
+      "UPDATE restaurants SET name = $1, location = $2, price_range = $3 WHERE id=$4 returning *",
+      [name, location, price_range, req.params.id]
+    );
+    res.status(200).json({
+      status: "success",
+      data: rows[0],
+    });
   } catch (e) {
     console.log(e);
     res.status(500).json({
