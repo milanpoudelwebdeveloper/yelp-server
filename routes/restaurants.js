@@ -20,4 +20,6 @@ router.put("/restaurant/:id", updateRestaurant)
 router.delete("/restaurant/:id", deleteRestaurant)
 
 
+router.get("/reviews/:id", )
+
 module.exports=router

@@ -55,3 +55,16 @@ CREATE TABLE restaurants (
 --HERE check(...) is a check constraint that checks if the price_range is between 1 and 5.
 --PRIMARY_KEY is unique and used to identify the element in the table. We can use id, email anything unique as primary key.
 
+
+--We have to associate the reviews table with the restaurants table: Here the restaurant id of the table
+--will act as the foreign key, We will use unqiue id that is stored as bigint to associate them
+
+--here restaurant(id) means we need or use id column of the restaurants table.
+CREATE TABLE reviews (
+    id BIGSERIAL NOT NULL PRIMARY KEY,
+    restaurant_id BIGINT  NOT NULL REFERENCES restaurants(id),
+    name VARCHAR(50) NOT NULL,
+    review TEXT NOT NULL,
+    rating INT NOT NULL check(rating >=1 and rating <=5)
+);
+
